@@ -38,9 +38,6 @@ const schema = mongoose.Schema(
             required: true,
             default: false,
         },
-        rating: {
-            type: Number,
-        },
         service: {
             type: String,
             ref: 'Service',
