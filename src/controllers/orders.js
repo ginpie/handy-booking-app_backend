@@ -66,5 +66,27 @@ function completeOrder(req, res) {
     return res.json(`Order completed`);
 }
 
+async function deleteOrder(req, res) {
+    const { id } = req.params;
+    const order = await Order.findByIdAndUpdate(
+        id, 
+        {deleted: true},
+    ).exec();
+    if (!order) {
+        return res.status(404).json('The order is not found');
+    }
+    if(order.deleted) {
+        return res.status(406).json('The order is already deleted');
+    }
 
+    await order.save();
+    return res.json('Successfully deleted')
+}
 
+module.exports = {
+    addOrder,
+    getOrder,
+    getAllOrder,
+    completeOrder,
+    deleteOrder
+};

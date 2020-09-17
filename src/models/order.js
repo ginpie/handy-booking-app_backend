@@ -50,6 +50,10 @@ const schema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             refer: 'Tradies',
         },
+        deleted: {
+            type: Boolean,
+            default: false,
+        },
     }
 );
 
