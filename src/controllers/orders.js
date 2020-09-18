@@ -49,7 +49,7 @@ async function getAllOrder(req, res) {
     return res.json(orders);
 }
 
-function completeOrder(req, res) {
+async function completeOrder(req, res) {
     const { id } = req.params;
     const order = await Order.findByIdAndUpdate(
         id, 
