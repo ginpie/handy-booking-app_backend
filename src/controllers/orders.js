@@ -12,9 +12,13 @@ async function addOrder(req, res) {
         serviceId, 
         clientId, 
         tradiesId } = req.body;
-    
+
+    const existingEmail = await Order.find({email: email}).exec();
+    if (existingEmail) {
+        return res.status(400).json("The email already registered")
+    }
+
     const createTime = new Date();
-    
     const order = new Order({
         createTime,
         serviceTime, 
@@ -29,8 +33,12 @@ async function addOrder(req, res) {
         tradiesId
     });
 
-    await order.save();
-
+    try {
+        await order.save();
+    } catch (error) {
+        return res.status(400).json(error);
+    }
+    
     return res.status(201).json(order);
 }
 

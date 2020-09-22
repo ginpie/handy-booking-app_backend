@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Joi = require('joi');
 
 const schema = mongoose.Schema(
     {
@@ -17,10 +18,18 @@ const schema = mongoose.Schema(
         contactNo: {
             type: String,
             required: true,
+            validate: {
+                validator: (contactNo) => !Joi.string().length(10).regex(/^[0-9]+$/).validate(contactNo).error,
+                msg: "Invalid phone number"
+            }
         },
         email: {
             type: String,
             required: true,
+            validate: {
+                validator:(email) => !Joi.string().email().validate(email).error,
+                msg: "Invalid email format"
+            }
         },
         firstName: {
             type: String,
