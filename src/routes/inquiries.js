@@ -1,19 +1,19 @@
-const express = require("express");
+// const express = require("express");
 
-const {
-  addInquiry,
-  getInquiry,
-  getAllInquiry,
-  acceptInquiry,
-  deleteInquiry,
-} = require("../controllers/inquiries");
+// const {
+//   addInquiry,
+//   getInquiry,
+//   getAllInquiry,
+//   acceptInquiry,
+//   deleteInquiry,
+// } = require("../controllers/inquiries");
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get("/", getAllInquiry);
-router.get("/:id", getInquiry);
-router.post("/", addInquiry);
-router.put("/:id/accepted", acceptInquiry);
-router.put("/:id/delete", deleteInquiry);
+// router.get("/", getAllInquiry);
+// router.get("/:id", getInquiry);
+// router.post("/", addInquiry);
+// router.put("/:id/accepted", acceptInquiry);
+// router.put("/:id/delete", deleteInquiry);
 
-module.exports = router;
+// module.exports = router;
