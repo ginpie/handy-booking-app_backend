@@ -5,6 +5,7 @@ const {
   addCustomer,
   deleteCustomer,
   updateCustomer,
+  addOrderForCustomers,
 } = require("../controllers/customers");
 const router = express.Router();
 
@@ -13,5 +14,5 @@ router.get("/:id", getCustomer);
 router.post("/", addCustomer);
 router.put("/:id", updateCustomer);
 router.delete("/:id", deleteCustomer);
-
+router.post("/:id/order/:code", addOrderForCustomers);
 module.exports = router;

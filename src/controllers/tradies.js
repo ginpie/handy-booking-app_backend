@@ -1,6 +1,7 @@
 const UserModel = require("../models/user");
 const TradieModel = require("../models/tradie");
 const JobModel = require("../models/job");
+const OrderModel = require("../models/order");
 
 async function getAllTradies(req, res) {
   const tradie = await TradieModel.find().exec();
@@ -102,6 +103,25 @@ async function addJobForTradie(req, res) {
     return res.json(tradie);
   }
 }
+
+async function addOrderForTradie(req, res) {
+  const { id, code } = req.params;
+  const tradie = await TradieModel.findById(id).select("orders").exec();
+
+  const order = await OrderModel.findById(code)
+    .select("tradies address")
+    .exec();
+  console.log(order);
+  if (!tradie || !order) {
+    return res.status(404).json("Tradie or Customer Not Found");
+  }
+  tradie.orders.addToSet(order._id);
+  order.tradies.addToSet(tradie._id);
+  await tradie.save();
+  await order.save();
+  console.log("tradie sent a order ");
+  return res.json(tradie);
+}
 module.exports = {
   getAllTradies,
   getTradie,
@@ -109,4 +129,5 @@ module.exports = {
   deleteTradie,
   updateTradie,
   addJobForTradie,
+  addOrderForTradie,
 };

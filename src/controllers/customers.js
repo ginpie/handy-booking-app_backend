@@ -1,5 +1,6 @@
 const UserModel = require("../models/user");
 const CustomerModel = require("../models/customer");
+const OrderModel = require("../models/order");
 
 async function getAllCustomers(req, res) {
   const customer = await CustomerModel.find().exec();
@@ -62,10 +63,28 @@ async function updateCustomer(req, res) {
   return res.json(customer);
 }
 
+async function addOrderForCustomers(req, res) {
+  const { id, code } = req.params;
+  const customer = await CustomerModel.findById(id).select("id orders").exec();
+  const order = await OrderModel.findById(code)
+    .select(" ContactNo address customers")
+    .exec();
+  console.log(order);
+  if (!customer || !order) {
+    return res.status(404).json("customer or Customer Not Found");
+  }
+  customer.orders.addToSet(order._id);
+  order.customers.addToSet(customer._id);
+  await customer.save();
+  await order.save();
+  console.log("customer sent a order ");
+  return res.json(customer);
+}
 module.exports = {
   getAllCustomers,
   getCustomer,
   addCustomer,
   deleteCustomer,
   updateCustomer,
+  addOrderForCustomers,
 };

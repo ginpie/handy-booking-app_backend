@@ -6,6 +6,7 @@ const {
   deleteTradie,
   updateTradie,
   addJobForTradie,
+  addOrderForTradie,
 } = require("../controllers/tradies");
 const router = express.Router();
 
@@ -15,4 +16,5 @@ router.post("/", addTradie);
 router.put("/:id", updateTradie);
 router.delete("/:id", deleteTradie);
 router.post("/:id/jobs/:code", addJobForTradie);
+router.post("/:id/order/:code", addOrderForTradie);
 module.exports = router;
