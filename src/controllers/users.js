@@ -1,6 +1,8 @@
 const UserModel = require("../models/user");
 const CustomerModel = require("../models/customer");
 const TradieModel = require("../models/tradie");
+const { generateToken } = require("../utils/jwt");
+
 async function getAllUsers(req, res) {
   const user = await UserModel.find().exec();
   res.json(user);
@@ -19,14 +21,24 @@ async function getUser(req, res) {
 }
 
 async function addUser(req, res) {
-  const { email, firstName, lastName } = req.body;
+  // const { email, firstName, lastName } = req.body;
+
+  const { email, password } = req.body;
+  const existUser = await UserModel.findOne({ email }).exec();
+  if (existUser) {
+    return res.status(409).json("Try Other Email");
+  }
   const user = new UserModel({
     email,
-    firstName,
-    lastName,
+    password,
+    // firstName,
+    // lastName,
   });
+  await user.hashPassword();
   await user.save();
-  return res.status(201).json(user);
+
+  const token = generateToken(user._id);
+  return res.json({ email, token });
 }
 
 async function deleteUser(req, res) {
