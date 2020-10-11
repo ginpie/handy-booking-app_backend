@@ -1,40 +1,47 @@
 const Order = require("../models/order");
 
 async function addOrder(req, res) {
-  const {
-    serviceTime,
-    address,
-    contactNo,
-    email,
-    firstName,
-    lastName,
-    totalPrice,
-  } = req.body;
 
-  //   const existingEmail = await Order.find({ email: email }).exec();
-  //   if (existingEmail) {
-  //     return res.status(400).json("The email already registered");
-  //   }
+    const { 
+        serviceTime, 
+        address, 
+        contactNo, 
+        email, 
+        firstName, 
+        lastName, 
+        totalPrice, 
+        serviceId, 
+        clientId, 
+        tradiesId } = req.body;
 
-  const createTime = new Date();
-  const order = new Order({
-    createTime,
-    serviceTime,
-    address,
-    contactNo,
-    email,
-    firstName,
-    lastName,
-    totalPrice,
-  });
+    const existingEmail = await Order.find({email: email}).exec();
+    if (existingEmail) {
+        return res.status(400).json("The email already registered")
+    }
 
-  try {
-    await order.save();
-  } catch (error) {
-    return res.status(400).json(error);
-  }
+    const createTime = new Date();
+    const order = new Order({
+        createTime,
+        serviceTime, 
+        address, 
+        contactNo, 
+        email, 
+        firstName, 
+        lastName, 
+        totalPrice, 
+        serviceId, 
+        clientId, 
+        tradiesId
+    });
 
-  return res.status(201).json(order);
+    try {
+        await order.save();
+    } catch (error) {
+        return res.status(400).json(error);
+    }
+    
+    return res.status(201).json(order);
+
 }
 
 async function getOrder(req, res) {
