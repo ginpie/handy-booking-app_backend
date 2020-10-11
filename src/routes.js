@@ -14,8 +14,10 @@ router.use("/auth", logInUser);
 router.use("/services", serviceRoute);
 router.use("/jobs", jobRoute);
 router.use("/users", userRoute);
-router.use("/customers", authGuard, customerRoute);
-router.use("/tradies", authGuard, tradieRoute);
+router.use("/customers", customerRoute);
+// router.use("/tradies", authGuard, tradieRoute);
+
+router.use("/tradies", tradieRoute);
 router.use("/inquiry", inquiryRoute);
 router.use("/order", orderRouter);
 module.exports = router;

@@ -20,14 +20,14 @@ async function getTradie(req, res) {
 }
 
 async function addTradie(req, res) {
-  const { tradieId, workTime } = req.body;
+  const { tradieId } = req.body;
+  console.log(`DEBUG: signUp ->req.body`, req.body);
   const existTradie = await TradieModel.findById(tradieId).exec();
   if (existTradie) {
     return res.status(409).json("Already Existed");
   }
   const tradie = new TradieModel({
     tradieId,
-    workTime,
   });
 
   await tradie.save();

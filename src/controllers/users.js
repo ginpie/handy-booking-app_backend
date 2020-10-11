@@ -24,6 +24,14 @@ async function addUser(req, res) {
   // const { email, firstName, lastName } = req.body;
 
   const { email, password } = req.body;
+  // const schema = Joi.object({
+  //   email: Joi.string()
+  //     .regex(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)
+  //     .required(),
+  //   password: Joi.string().required(),
+  // });
+  // const data = await schema.validateAsync(req.body, { allowUnknown: true, stripUnknown: true });
+  console.log(`DEBUG: signUp ->req.body`, req.body);
   const existUser = await UserModel.findOne({ email }).exec();
   if (existUser) {
     return res.status(409).json("Try Other Email");

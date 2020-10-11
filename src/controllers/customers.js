@@ -19,15 +19,16 @@ async function getCustomer(req, res) {
 }
 
 async function addCustomer(req, res) {
-  const { customerId, ContactNo, address } = req.body;
+  const { customerId } = req.body;
+  console.log(`DEBUG: signUp ->req.body`, req.body);
   const existCustomer = await CustomerModel.findById(customerId).exec();
   if (existCustomer) {
     return res.status(409).json("Already Existed");
   }
   const user = new CustomerModel({
-    address,
+    // address,
     customerId,
-    ContactNo,
+    // ContactNo,
   });
   await user.save();
   return res.status(201).json(user);
