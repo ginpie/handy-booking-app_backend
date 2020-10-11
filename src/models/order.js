@@ -51,14 +51,8 @@ const schema = mongoose.Schema(
             type: String,
             ref: 'Service',
         },
-        client: {
-            type: mongoose.Schema.Types.ObjectId,
-            refer: 'Customer',
-        },
-        tradies: {
-            type: mongoose.Schema.Types.ObjectId,
-            refer: 'Tradies',
-        },
+        customers: { type: [{ type: String, ref: "Customer" }], select: false },
+        tradies: { type: [{ type: String, ref: "Tradie" }], select: false },
         deleted: {
             type: Boolean,
             default: false,
@@ -66,6 +60,7 @@ const schema = mongoose.Schema(
     }
 );
 
-const Model = mongoose.model('Order', schema);
+  
+const Model = mongoose.model("Order", schema);
 
 module.exports = Model;
