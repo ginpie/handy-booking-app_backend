@@ -14,12 +14,12 @@ async function logInUser(req, res) {
     return res.status(401).json("Invalid Exmail or Password");
   }
   const unSeeUser = {
-    id: user.id,
-    email: user.email,
+    id: existUser.id,
+    email: existUser.email,
   };
-  const token = generateToken(existUser._id);
-  res.set("X-Auth-Token", token).status(200).json(unSeeUser);
-  return res.json({ email, token });
+  const token = generateToken(existUser.email);
+  return res.set("X-Auth-Token", token).status(200).json(unSeeUser);
+  
 }
 
 async function stayLogIn(req,res){
@@ -27,7 +27,8 @@ async function stayLogIn(req,res){
   if(!token){
     return res.status(404).json("Not Found User");
   }
-  try{const result = validateToken(token,JWT_KEY);
+  try{
+    const result = validateToken(token,JWT_KEY);
     if(!result){
       return res.status(404).json("Not Found User")
     }
@@ -35,11 +36,13 @@ async function stayLogIn(req,res){
     if(!user){
       return res.status(404).json("Not Found User")
     }
-    const unSeeUser = {
+    const unSeeUser = { 
       id: user.id,
       email: user.email,
     };
-    res.status(200).json(unSeeUser);}catch(e){
+    return res.status(200).json(unSeeUser);
+  }
+    catch(e){
       if (e.name ==="TokenExpiredError")
       {
         return res.status(401).json("Access Denied");
