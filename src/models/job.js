@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-//TO DO 和tradie 互相关联
 const schema = new mongoose.Schema({
   jobName: {
     type: String,

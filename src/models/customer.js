@@ -14,8 +14,9 @@ const schema = new mongoose.Schema(
       default: true,
     },
     ContactNo: {
-      type: String,
-      default: "firstName ",
+      type: Number,
+      default: "Phone Number ",
+      required: true,
     },
     users: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],

@@ -18,12 +18,6 @@ const schema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    //   needInfo: { type: Array, required: true },
-    // tradies: {},
-    //   jobs: {
-    //     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
-    //     select: false,
-    //   },
     __v: { type: Number, select: false },
     createdAt: { type: Date, select: false },
     jobs: {
