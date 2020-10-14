@@ -1,6 +1,6 @@
 const Inquiry = require("../models/inquiry");
 
-async function putInquiry(req, res) {
+async function addInquiry(req, res) {
   const {
     zipCode,
     jobDateTime,
@@ -12,13 +12,13 @@ async function putInquiry(req, res) {
     serviceId,
     clientId,
     tradiesId,
-    accepted,
+    // accepted,
   } = req.body;
 
   const createTime = new Date();
+  const accepted = false;
 
   const inquiry = new Inquiry({
-    createTime,
     zipCode,
     jobDateTime,
     contactNo,
@@ -38,28 +38,30 @@ async function putInquiry(req, res) {
 }
 
 // Create an inquiry
-async function addInquiry(req, res) {
-  const {
-    zipCode,
-    jobDateTime,
-    contactNo,
-    email,
-    firstName,
-    lastName,
-    message,
-  } = req.body;
-  const inquiry = new Inquiry({
-    zipCode,
-    jobDateTime,
-    contactNo,
-    email,
-    firstName,
-    lastName,
-    message,
-  });
-  await inquiry.save();
-  return res.status(201).json(inquiry);
-}
+// async function addInquiry(req, res) {
+//   const {
+//     trywork,
+//     zipCode,
+//     jobDateTime,
+//     contactNo,
+//     email,
+//     firstName,
+//     lastName,
+//     message,
+//   } = req.body;
+//   const inquiry = new Inquiry({
+//     // trywork,
+//     zipCode,
+//     jobDateTime,
+//     contactNo,
+//     email,
+//     firstName,
+//     lastName,
+//     message,
+//   });
+//   await inquiry.save();
+//   return res.status(201).json(inquiry);
+// }
 
 // Read the inquiry using id
 async function getInquiry(req, res) {

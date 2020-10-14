@@ -43,11 +43,11 @@ const schema = mongoose.Schema({
     ref: "Service",
   },
   clientId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.String,
     refer: "Customer",
   },
   tradiesID: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.String,
     refer: "Tradie",
   },
   accepted: {
