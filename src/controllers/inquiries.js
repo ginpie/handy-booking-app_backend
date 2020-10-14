@@ -19,6 +19,7 @@ async function addInquiry(req, res) {
   const accepted = false;
 
   const inquiry = new Inquiry({
+    createTime,
     zipCode,
     jobDateTime,
     contactNo,
