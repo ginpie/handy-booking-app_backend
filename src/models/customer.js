@@ -15,7 +15,7 @@ const schema = new mongoose.Schema(
     },
     ContactNo: {
       type: Number,
-      default: "Phone Number ",
+      default: true,
       required: true,
     },
     users: {
