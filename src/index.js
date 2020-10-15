@@ -1,6 +1,7 @@
 require("dotenv").config();
 require("express-async-errors");
 
+const PORT = process.env.PORT || 3000;
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -8,6 +9,7 @@ const { connectToDB } = require("./utils/db");
 const errorHandler = require("./middleware/errorHandler");
 const app = express();
 const routes = require("./routes");
+
 app.use(express.json());
 app.use(
   cors({
@@ -19,7 +21,7 @@ app.use(bodyParser.json());
 app.use("/api", routes);
 
 app.use(errorHandler);
-const PORT = process.env.PORT || 3000;
+
 connectToDB();
 
 app.listen(PORT, () => {
