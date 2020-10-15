@@ -31,15 +31,16 @@ const schema = mongoose.Schema(
                 msg: "Invalid email format"
             }
         },
-        firstName: {
-            type: String,
-            required: true,
-        },
-        lastName: {
+        name: {
             type: String,
         },
         totalPrice: {
             type: Number,
+            required: true,
+        },
+        message: {
+            type: String,
+            // ref: "Message",
             required: true,
         },
         complete: {

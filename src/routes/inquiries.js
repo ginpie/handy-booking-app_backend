@@ -4,6 +4,7 @@ const {
   addInquiry,
   getInquiry,
   getAllInquiry,
+  addPrice,
   acceptInquiry,
   deleteInquiry,
 } = require("../controllers/inquiries");
@@ -14,6 +15,7 @@ router.get("/", getAllInquiry);
 router.get("/:id", getInquiry);
 router.post("/", addInquiry);
 router.put("/:id/accepted", acceptInquiry);
+router.put("/:id/price", addPrice);
 router.put("/:id/delete", deleteInquiry);
 
 module.exports = router;
