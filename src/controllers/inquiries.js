@@ -1,13 +1,17 @@
 const Inquiry = require("../models/inquiry");
+const { addOrder } = require("./orders");
 
 async function addInquiry(req, res) {
   const {
+    address,
+    address2,
+    suburb,
+    state,
     zipCode,
-    jobDateTime,
+    serviceTime,
     contactNo,
     email,
-    firstName,
-    lastName,
+    name,
     message,
     serviceId,
     clientId,
@@ -19,13 +23,15 @@ async function addInquiry(req, res) {
   const accepted = false;
 
   const inquiry = new Inquiry({
-    createTime,
+    createTime,address,
+    address2,
+    suburb,
+    state,
     zipCode,
-    jobDateTime,
+    serviceTime,
     contactNo,
     email,
-    firstName,
-    lastName,
+    name,
     message,
     serviceId,
     clientId,
@@ -37,32 +43,6 @@ async function addInquiry(req, res) {
 
   return res.status(201).json(inquiry);
 }
-
-// Create an inquiry
-// async function addInquiry(req, res) {
-//   const {
-//     trywork,
-//     zipCode,
-//     jobDateTime,
-//     contactNo,
-//     email,
-//     firstName,
-//     lastName,
-//     message,
-//   } = req.body;
-//   const inquiry = new Inquiry({
-//     // trywork,
-//     zipCode,
-//     jobDateTime,
-//     contactNo,
-//     email,
-//     firstName,
-//     lastName,
-//     message,
-//   });
-//   await inquiry.save();
-//   return res.status(201).json(inquiry);
-// }
 
 // Read the inquiry using id
 async function getInquiry(req, res) {
@@ -81,20 +61,55 @@ async function getAllInquiry(req, res) {
   return res.json(inquiries);
 }
 
-// accept the inquiry (Update)
-async function acceptInquiry(req, res) {
+async function addPrice(req, res) {
   const { id } = req.params;
+  const { totalPrice } = req.body;
   const inquiry = await Inquiry.findByIdAndUpdate(id, {
-    accepted: true,
+    totalPrice,
   }).exec();
   if (!inquiry) {
     return res.status(404).json("This inquiry is not found!");
+  }
+
+  await inquiry.save();
+  return res.json(inquiry);
+}
+
+// accept the inquiry (Update)
+async function acceptInquiry(req, res) {
+  const { id } = req.params;
+  const inquiry = await Inquiry.findById(id).exec();
+  if (!inquiry) {
+    return res.status(404).json("This inquiry is not found!");
+  }
+  if (!inquiry.totalPrice) {
+    return res.status(406).json("This inquiry is not receive a price.");
   }
   if (inquiry.accepted) {
     return res.status(406).json("This inquiry is already accepted.");
   }
 
-  await inquiry.save();
+  const newInquiry = await Inquiry.findByIdAndUpdate(id, {
+    accepted: true,
+  }).exec();
+
+  await newInquiry.save();
+
+  const address = `${inquiry.address} ${inquiry.address2} ${inquiry.suburb} ${inquiry.state} ${inquiry.zipCode}`;
+  const {serviceTime, contactNo, name, email, totalPrice, serviceId, clientId, tradiesId} = inquiry;
+  await addOrder({
+    body: {
+      serviceTime, 
+      address, 
+      contactNo, 
+      email, 
+      name, 
+      totalPrice, 
+      serviceId, 
+      clientId, 
+      tradiesId
+  }}, res)
+
   return res.json(inquiry);
 }
 
@@ -118,6 +133,7 @@ module.exports = {
   addInquiry,
   getInquiry,
   getAllInquiry,
+  addPrice,
   acceptInquiry,
   deleteInquiry,
 };

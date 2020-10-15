@@ -8,11 +8,31 @@ const schema = mongoose.Schema({
   },
 
   // Client information
+  address: {
+    type: String,
+    required: true,
+  },
+
+  address2: {
+    type: String,
+  },
+
+  suburb: {
+    type: String,
+    required: true,
+  },
+
+  state: {
+    type: String,
+    required: true,
+  },
+
   zipCode: {
     type: Number,
     required: true,
   },
-  jobDateTime: {
+
+  serviceTime: {
     type: String,
     required: true,
   },
@@ -24,21 +44,18 @@ const schema = mongoose.Schema({
     type: String,
     required: true,
   },
-  firstName: {
+  name: {
     type: String,
     required: true,
-  },
-  lastName: {
-    type: String,
   },
 
   // inquiry information
   message: {
     type: String,
-    ref: "Message",
+    // ref: "Message",
     required: true,
   },
-  service: {
+  serviceId: {
     type: String,
     ref: "Service",
   },
@@ -50,6 +67,9 @@ const schema = mongoose.Schema({
     type: mongoose.Schema.Types.String,
     refer: "Tradie",
   },
+  totalPrice: {
+    type: Number,
+},
   accepted: {
     type: Boolean,
     default: false,
