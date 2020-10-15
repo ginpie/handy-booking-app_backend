@@ -9,7 +9,6 @@ const errorHandler = require("./middleware/errorHandler");
 const app = express();
 const routes = require("./routes");
 app.use(express.json());
-
 app.use(
   cors({
     exposedHeaders: "X-Auth-Token",
@@ -24,5 +23,5 @@ const PORT = process.env.PORT || 3000;
 connectToDB();
 
 app.listen(PORT, () => {
-  console.log("listening on port 3000");
+  console.log(`listening on port ${PORT}`);
 });
