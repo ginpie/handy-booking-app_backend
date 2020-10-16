@@ -10,9 +10,9 @@ const schema = new mongoose.Schema(
     },
     //To Do
     workTime: {
-      type: Boolean,
+      type: String,
       required: true,
-      default: true,
+      default: "Monday ",
     },
     PostCode: {
       type: String,
@@ -20,7 +20,7 @@ const schema = new mongoose.Schema(
     },
     description: {
       type: String,
-      default: "lastName ",
+      default: "description about what this tradie able to do ",
     },
     users: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
