@@ -24,15 +24,12 @@ const schema = new mongoose.Schema({
   },
   firstName: {
     type: String,
-    default: "firstName ",
   },
   lastName: {
     type: String,
-    default: "lastName ",
   },
   avatar: {
     type: String,
-    default: "avatar ",
   },
   createdAt: {
     type: Date,
