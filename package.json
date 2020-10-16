@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "pm2 start src/index.js --name handy",
+    "poststart": "pm2 log handy",
+    "stop": "pm2 stop handy",
+    "dev": "nodemon src/index.js",
+    "debug": "nodemon --inspect src/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +30,9 @@
     "express-async-errors": "^3.1.1",
     "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.5"
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.5",
+    "pm2": "^4.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
