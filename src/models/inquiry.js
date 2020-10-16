@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const schema = mongoose.Schema({
- 
+
   createTime: {
     type: Date,
     required: true,
@@ -69,7 +69,7 @@ const schema = mongoose.Schema({
   },
   totalPrice: {
     type: Number,
-},
+  },
   accepted: {
     type: Boolean,
     default: false,

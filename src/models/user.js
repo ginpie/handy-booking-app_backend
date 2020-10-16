@@ -38,8 +38,20 @@ const schema = new mongoose.Schema({
     type: Date,
     select: false,
   },
-  customers: { type: [{ type: String, ref: "Customer" }], select: false },
-  tradies: { type: [{ type: String, ref: "Tradie" }], select: false },
+  customers: {
+    type: [{
+      type: String,
+      ref: "Customer"
+    }],
+    select: false
+  },
+  tradies: {
+    type: [{
+      type: String,
+      ref: "Tradie"
+    }],
+    select: false
+  },
 });
 
 schema.methods.hashPassword = async function () {

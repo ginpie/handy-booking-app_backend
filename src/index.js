@@ -5,7 +5,9 @@ const PORT = process.env.PORT || 3000;
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { connectToDB } = require("./utils/db");
+const {
+  connectToDB
+} = require("./utils/db");
 const errorHandler = require("./middleware/errorHandler");
 const app = express();
 const routes = require("./routes");

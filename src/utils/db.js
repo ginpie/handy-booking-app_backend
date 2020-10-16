@@ -14,7 +14,7 @@ exports.connectToDB = () => {
   if (NODE_ENV === "production") {
     connectionString = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}`;
   } else {
-    connectionString = `mongodb://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`;
+    connectionString = `mongodb://${DB_HOST_TEST}:${DB_PORT_TEST}/${DB_DATABASE_TEST}`;
   }
 
   // const connectionString = 'mongodb://localhost:27017/handyman-test';
