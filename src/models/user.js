@@ -30,6 +30,14 @@ const schema = new mongoose.Schema({
     type: String,
     default: "lastName ",
   },
+  DOB: {
+    type: String,
+    default: "DOB ",
+  },
+  phoneNumber: {
+    type: Number,
+    default: "0411111111 ",
+  },
   avatar: {
     type: String,
     default: "avatar ",
