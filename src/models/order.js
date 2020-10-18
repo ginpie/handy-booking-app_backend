@@ -41,7 +41,6 @@ const schema = mongoose.Schema(
         message: {
             type: String,
             // ref: "Message",
-            required: true,
         },
         complete: {
             type: Boolean,
@@ -52,16 +51,33 @@ const schema = mongoose.Schema(
             type: String,
             ref: 'Service',
         },
-        customers: { type: [{ type: String, ref: "Customer" }], select: false },
-        tradies: { type: [{ type: String, ref: "Tradie" }], select: false },
+        clientId: {
+            type: mongoose.Schema.Types.String,
+            refer: "Customer",
+            required: true,
+        },
+        tradiesId: {
+            type: mongoose.Schema.Types.String,
+            refer: "Tradie",
+            required: true,
+        },
         deleted: {
             type: Boolean,
             default: false,
         },
+        rating: {
+            type: Number,
+            validate: {
+                validator:(rating) => !Joi.number().min(0).max(5).validate(rating).error,
+                msg: "Please input rating between 0 and 5.",
+            }
+        },
+        comment: {
+            type: String,
+        }
     }
 );
 
-  
 const Model = mongoose.model("Order", schema);
 
 module.exports = Model;

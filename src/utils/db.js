@@ -8,6 +8,9 @@ exports.connectToDB = () => {
     DB_USER,
     DB_PASSWORD,
     NODE_ENV,
+    DB_HOST_TEST,
+    DB_PORT_TEST,
+    DB_DATABASE_TEST,
   } = process.env;
 
   let connectionString;

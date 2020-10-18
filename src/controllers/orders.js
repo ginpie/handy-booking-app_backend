@@ -46,7 +46,7 @@ async function getOrder(req, res) {
     .populate("tradies")
     .populate("services")
     .exec();
-  if (!order) {
+  if (!order || order.deleted) {
     return res.status(404).json("The order is not found");
   }
 
@@ -54,7 +54,7 @@ async function getOrder(req, res) {
 }
 
 async function getAllOrder(req, res) {
-  const orders = await Order.find().exec();
+  const orders = await Order.find({deleted: false}).exec();
   return res.json(orders);
 }
 
@@ -86,10 +86,34 @@ async function deleteOrder(req, res) {
   return res.json("Successfully deleted");
 }
 
+async function addReviews(req, res) {
+  const { id } = req.params;
+  const { rating, comment } = req.body;
+  const order = await Order.findByIdAndUpdate(id, {
+    rating,
+    comment,
+  });
+
+  if (order.rating) {
+    return res.status(406).json("The comment already has been reviewed");
+  }
+
+  await order.save();
+  return res.json("Successfully reviewed");
+}
+
+async function getOrdersByTradies(req, res) {
+  const { id } = req.params;
+  const orders = await Order.find({tradiesId: id});
+  return res.json(orders);
+}
+
 module.exports = {
   addOrder,
   getOrder,
   getAllOrder,
   completeOrder,
   deleteOrder,
+  addReviews,
+  getOrdersByTradies,
 };
