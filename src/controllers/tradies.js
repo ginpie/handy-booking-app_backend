@@ -64,10 +64,10 @@ async function deleteTradie(req, res) {
 
 async function updateTradie(req, res) {
   const { id: tradieId } = req.params;
-  const { workTime } = req.body;
+  const { PostCode } = req.body;
   const tradie = await TradieModel.findByIdAndUpdate(
     tradieId,
-    { workTime },
+    { PostCode },
     { new: true }
   ).exec();
 
