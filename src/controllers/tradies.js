@@ -4,7 +4,12 @@ const JobModel = require("../models/job");
 const OrderModel = require("../models/order");
 
 async function getAllTradies(req, res) {
-  const tradie = await TradieModel.find().exec();
+  const tradie = await TradieModel.find()
+  .populate("users", "firstName lastName avatar")
+  .populate("inquiries", "_id")
+  .populate("jobs", "jobName description")
+  .populate("orders", "totalPrice")
+  .exec();
   res.json(tradie);
 }
 
