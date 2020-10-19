@@ -1,5 +1,14 @@
 const mongoose = require("mongoose");
 
+const DB_HOST_TEST = "localhost";
+const DB_PORT_TEST = "27017";
+const DB_DATABASE_TEST = "handyman-test";
+const DB_HOST = "cluster-handy-booking-a.mzaot.mongodb.net";
+const DB_USER = "handy";
+const DB_PASSWORD = "nxBuslpT668dGuRH";
+const DB_DATABASE = "test";
+const NODE_ENV = "production";
+
 exports.connectToDB = () => {
   const {
     DB_HOST,
@@ -12,6 +21,7 @@ exports.connectToDB = () => {
     DB_PORT_TEST,
     DB_DATABASE_TEST,
   } = process.env;
+
 
   let connectionString;
   if (NODE_ENV === "production") {
