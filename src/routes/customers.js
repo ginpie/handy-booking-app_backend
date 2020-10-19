@@ -1,18 +1,20 @@
 const express = require("express");
 const {
   getAllCustomers,
-  getCustomer,
+  getCustomerAllInfo,
   addCustomer,
   deleteCustomer,
-  updateCustomer,
+  updateCustomerAddress,
   addOrderForCustomers,
+  getCustomerOrderInfo,
 } = require("../controllers/customers");
 const router = express.Router();
 
 router.get("/", getAllCustomers);
-router.get("/:id", getCustomer);
+router.get("/:id", getCustomerAllInfo);
 router.post("/", addCustomer);
-router.put("/:id", updateCustomer);
+router.put("/:id", updateCustomerAddress);
 router.delete("/:id", deleteCustomer);
 router.post("/:id/order/:code", addOrderForCustomers);
+router.get("/:id/order", getCustomerOrderInfo);
 module.exports = router;

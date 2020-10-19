@@ -28,6 +28,14 @@ const schema = new mongoose.Schema({
   lastName: {
     type: String,
   },
+  DOB: {
+    type: String,
+    default: "DOB ",
+  },
+  phoneNumber: {
+    type: Number,
+    default: "0411111111 ",
+  },
   avatar: {
     type: String,
   },

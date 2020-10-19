@@ -69,10 +69,10 @@ async function deleteUser(req, res) {
 
 async function updateUser(req, res) {
   const { id } = req.params;
-  const { email, firstName, lastName } = req.body;
+  const { DOB, firstName, lastName,phoneNumber } = req.body;
   const user = await UserModel.findByIdAndUpdate(
     id,
-    { email, firstName, lastName },
+    { DOB, firstName, lastName,phoneNumber },
     { new: true }
   ).exec();
 
@@ -83,6 +83,36 @@ async function updateUser(req, res) {
   return res.json(user);
 }
 
+async function updateUserAvatar(req, res) {
+  const { id } = req.params;
+  const { avatar} = req.body;
+  const user = await UserModel.findByIdAndUpdate(
+    id,
+    { avatar },
+    { new: true }
+  ).exec();
+
+  if (!user) {
+    return res.status(404).json("user Not Found");
+  }
+  await user.save();
+  return res.json(user);
+}
+async function updateUserPassword(req, res) {
+  const { id } = req.params;
+  const { password} = req.body;
+  const user = await UserModel.findByIdAndUpdate(
+    id,
+    { password },
+    { new: true }
+  ).exec();
+
+  if (!user) {
+    return res.status(404).json("user Not Found");
+  }
+  await user.save();
+  return res.json(user);
+}
 async function addUserTOCustomers(req, res) {
   const { id, code } = req.params;
   const user = await UserModel.findById(id).select("id customers").exec();
@@ -201,6 +231,8 @@ module.exports = {
   addUser,
   deleteUser,
   updateUser,
+  updateUserAvatar,
+  updateUserPassword,
   addUserTOCustomers,
   addUserTOTradies,
   notCustomer,
