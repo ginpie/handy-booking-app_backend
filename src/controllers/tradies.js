@@ -4,20 +4,39 @@ const JobModel = require("../models/job");
 const OrderModel = require("../models/order");
 
 async function getAllTradies(req, res) {
-  const tradie = await TradieModel.find().exec();
+  const tradie = await TradieModel.find()
+  .populate("users", "firstName lastName avatar")
+  .populate("inquiries", "_id")
+  .populate("jobs", "jobName description")
+  .populate("orders", "totalPrice")
+  .exec();
   res.json(tradie);
 }
 
-async function getTradie(req, res) {
+async function getTradieAllInfo(req, res) {
   const { id: tradieId } = req.params;
   const tradie = await TradieModel.findById(tradieId)
-    .populate("users", "_id firstName lastName")
+    .populate("users", "firstName lastName avatar")
+    .populate("inquiries", "_id")
+    .populate("jobs", "jobName description")
+    .populate("orders", "totalPrice")
     .exec();
   if (!tradie) {
     return res.status(404).json("tradie Not Found");
   }
   return res.json(tradie);
 }
+async function getTradieInquiries(req, res) {
+  const { id: tradieId } = req.params;
+  const tradie = await TradieModel.findById(tradieId)
+    .populate("inquiries", "jobDateTime createTime zipCode contactNo email firstName lastName")
+    .exec();
+  if (!tradie) {
+    return res.status(404).json("tradie Not Found");
+  }
+  return res.json(tradie);
+}
+
 
 async function addTradie(req, res) {
   const { tradieId } = req.body;
@@ -50,10 +69,10 @@ async function deleteTradie(req, res) {
 
 async function updateTradie(req, res) {
   const { id: tradieId } = req.params;
-  const { workTime } = req.body;
+  const { PostCode } = req.body;
   const tradie = await TradieModel.findByIdAndUpdate(
     tradieId,
-    { workTime },
+    { PostCode },
     { new: true }
   ).exec();
 
@@ -68,7 +87,8 @@ async function addJobForTradie(req, res) {
   const { id, code } = req.params;
 
   const tradie = await TradieModel.findById(id)
-    .select("tradieId jobs workTime")
+    .select("tradieId jobs")
+    .populate("jobs", "jobName description")
     .exec();
   const job = await JobModel.findById(code)
     .select("tradies jobName description")
@@ -124,10 +144,11 @@ async function addOrderForTradie(req, res) {
 }
 module.exports = {
   getAllTradies,
-  getTradie,
+  getTradieAllInfo,
   addTradie,
   deleteTradie,
   updateTradie,
   addJobForTradie,
   addOrderForTradie,
+  getTradieInquiries,
 };

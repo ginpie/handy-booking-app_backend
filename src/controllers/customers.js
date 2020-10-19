@@ -7,10 +7,24 @@ async function getAllCustomers(req, res) {
   res.json(customer);
 }
 
-async function getCustomer(req, res) {
+async function getCustomerAllInfo(req, res) {
   const { id: customerId } = req.params;
   const customer = await CustomerModel.findById(customerId)
-    .populate("users", "_id firstName lastName")
+    .populate("users", "_id firstName lastName avatar")
+    .populate("jobs", "jobName description")
+    .populate("orders", "totalPrice")
+    .exec();
+  if (!customer) {
+    return res.status(404).json("customer Not Found");
+  }
+  return res.json(customer);
+}
+
+
+async function getCustomerOrderInfo(req, res) {
+  const { id: customerId } = req.params;
+  const customer = await CustomerModel.findById(customerId)
+    .populate("orders", "totalPrice")
     .exec();
   if (!customer) {
     return res.status(404).json("customer Not Found");
@@ -48,12 +62,12 @@ async function deleteCustomer(req, res) {
   return res.sendStatus(200);
 }
 
-async function updateCustomer(req, res) {
+async function updateCustomerAddress(req, res) {
   const { id: customerId } = req.params;
-  const { ContactNo, address } = req.body;
+  const { address } = req.body;
   const customer = await CustomerModel.findByIdAndUpdate(
     customerId,
-    { ContactNo, address },
+    { address },
     { new: true }
   ).exec();
 
@@ -83,9 +97,10 @@ async function addOrderForCustomers(req, res) {
 }
 module.exports = {
   getAllCustomers,
-  getCustomer,
+  getCustomerAllInfo,
   addCustomer,
   deleteCustomer,
-  updateCustomer,
+  updateCustomerAddress,
   addOrderForCustomers,
+  getCustomerOrderInfo,
 };

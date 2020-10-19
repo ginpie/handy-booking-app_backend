@@ -10,6 +10,17 @@ const DB_DATABASE = "test";
 const NODE_ENV = "production";
 
 exports.connectToDB = () => {
+  const {
+    DB_HOST,
+    DB_PORT,
+    DB_DATABASE,
+    DB_USER,
+    DB_PASSWORD,
+    NODE_ENV,
+    DB_HOST_TEST,
+    DB_PORT_TEST,
+    DB_DATABASE_TEST,
+  } = process.env;
 
 
   let connectionString;

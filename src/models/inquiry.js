@@ -37,7 +37,7 @@ const schema = mongoose.Schema({
     required: true,
   },
   contactNo: {
-    type: Number,
+    type: String,
     required: false,
   },
   email: {
@@ -58,14 +58,17 @@ const schema = mongoose.Schema({
   serviceId: {
     type: String,
     ref: "Service",
+    required: true,
   },
   clientId: {
     type: mongoose.Schema.Types.String,
     refer: "Customer",
+    required: true,
   },
-  tradiesID: {
+  tradiesId: {
     type: mongoose.Schema.Types.String,
     refer: "Tradie",
+    required: true,
   },
   totalPrice: {
     type: Number,
