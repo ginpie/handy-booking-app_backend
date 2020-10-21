@@ -7,30 +7,27 @@ const schema = mongoose.Schema({
     required: true,
   },
 
-  // Client information
   address: {
+    address1: {
+      type: String,
+      required: true,
+    },
+    address2: {
     type: String,
-    required: true,
-  },
-
-  address2: {
-    type: String,
-  },
-
-  suburb: {
-    type: String,
-    required: true,
-  },
-
-  state: {
-    type: String,
-    required: true,
-  },
-
-  zipCode: {
-    type: Number,
-    required: true,
-  },
+    },
+    suburb: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    zipCode: {
+      type: Number,
+      required: true,
+    },
+  }
 
   serviceTime: {
     type: String,

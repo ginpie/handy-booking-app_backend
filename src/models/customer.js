@@ -9,9 +9,21 @@ const schema = new mongoose.Schema(
       alias: "customerId",
     },
     address: {
-      type: String,
-      required: true,
-      default: true,
+      address1: {
+        type: String,
+      },
+      address2: {
+        type: String,
+      },
+      suburb: {
+        type: String,
+      },
+      state: {
+        type: String,
+      },
+      zipCode: {
+        type: Number,
+      },
     },
     ContactNo: {
       type: Number,
