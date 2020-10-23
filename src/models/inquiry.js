@@ -27,8 +27,7 @@ const schema = mongoose.Schema({
       type: Number,
       required: true,
     },
-  }
-
+  },
   serviceTime: {
     type: String,
     required: true,
