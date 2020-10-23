@@ -19,7 +19,7 @@ async function getTradieAllInfo(req, res) {
     .populate("users", "firstName lastName avatar")
     .populate("inquiries", "_id")
     .populate("jobs", "jobName description")
-    .populate("orders", "totalPrice")
+    .populate("orders", "_id totalPrice")
     .exec();
   if (!tradie) {
     return res.status(404).json("tradie Not Found");

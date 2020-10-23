@@ -71,12 +71,12 @@ const schema = mongoose.Schema(
         clientId: {
             type: mongoose.Schema.Types.String,
             refer: "Customer",
-            required: true,
+            // required: true,
         },
         tradiesId: {
             type: mongoose.Schema.Types.String,
             refer: "Tradie",
-            required: true,
+            // required: true,
         },
         deleted: {
             type: Boolean,

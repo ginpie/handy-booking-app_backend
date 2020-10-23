@@ -1,0 +1,161 @@
+[{
+  "_id": "SERVICE0",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92edfb7500941dd83a7304"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:06.173Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:54:48.497Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE1",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee077500941dd83a7305"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:11.241Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:55:01.089Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE2",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee097500941dd83a7306"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:13.083Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:55:12.214Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE3",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee0b7500941dd83a7307"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:15.138Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:55:26.508Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE4",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee0d7500941dd83a7308"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:17.485Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:55:37.333Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE5",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee0f7500941dd83a7309"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:19.384Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:55:49.098Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE6",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee117500941dd83a730a"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:21.301Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:56:00.615Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE7",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee137500941dd83a730b"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:23.634Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:56:13.605Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE8",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee157500941dd83a730c"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:25.550Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:56:26.510Z"
+  },
+  "__v": 0
+},{
+  "_id": "SERVICE9",
+  "description": "",
+  "jobs": [
+    {
+      "$oid": "5f92ee177500941dd83a730d"
+    }
+  ],
+  "serviceName": "passBy",
+  "createdAt": {
+    "$date": "2020-10-23T14:53:28.863Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:56:38.522Z"
+  },
+  "__v": 0
+}]
