@@ -1,0 +1,202 @@
+[{
+  "_id": "1",
+  "address": "true",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f8da9a0b473b01a480dc28a"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-19T14:58:22.621Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:43:05.232Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST1@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92dfed7500941dd83a72f9"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T13:51:41.496Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:44:58.171Z"
+  },
+  "__v": 0
+},{
+  "_id": "DUSHANGJIE@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:29:56.033Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:29:56.033Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST2@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92ea627500941dd83a72fb"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:36:19.335Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:45:45.332Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST3@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92ea747500941dd83a72fc"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:36:36.847Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:45:58.774Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST4@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92ea817500941dd83a72fd"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:36:49.389Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:46:23.242Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST5@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92ea9c7500941dd83a72fe"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:37:16.675Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:46:58.019Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST6@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92eaa87500941dd83a72ff"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:37:28.523Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:47:13.121Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST7@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92eab07500941dd83a7300"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:37:36.972Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:47:48.829Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST8@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92eaba7500941dd83a7301"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:37:46.445Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:48:03.124Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST9@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92eac47500941dd83a7302"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:37:56.343Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:48:29.222Z"
+  },
+  "__v": 0
+},{
+  "_id": "TEST0@GMAIL.COM",
+  "ContactNo": 1,
+  "users": [
+    {
+      "$oid": "5f92ed477500941dd83a7303"
+    }
+  ],
+  "orders": [],
+  "inquiries": [],
+  "createdAt": {
+    "$date": "2020-10-23T14:48:39.893Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-23T14:49:06.761Z"
+  },
+  "__v": 0
+}]
