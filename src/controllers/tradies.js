@@ -5,10 +5,10 @@ const OrderModel = require("../models/order");
 
 async function getAllTradies(req, res) {
   const tradie = await TradieModel.find()
-  .populate("users", "firstName lastName avatar")
-  .populate("inquiries", "_id")
+  .populate("users", "_id firstName lastName avatar")
   .populate("jobs", "jobName description")
-  .populate("orders", "totalPrice")
+  .populate("orders", "createTime serviceTime address  contactNo  email name totalPrice  message service tradiesId rating comment")
+  .populate("inquiries", "createTime serviceTime address  contactNo  email name message serviceId tradiesId totalPrice accepted")
   .exec();
   res.json(tradie);
 }
