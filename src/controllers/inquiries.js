@@ -18,19 +18,22 @@ async function addInquiry(req, res) {
     serviceId,
     clientId,
     tradiesId,
-    // accepted,
   } = req.body;
+
+
 
   const createTime = new Date();
   const accepted = false;
 
   const inquiry = new Inquiry({
     createTime,
-    address,
-    address2,
-    suburb,
-    state,
-    zipCode,
+    address: {
+      address,
+      address2,
+      suburb,
+      state,
+      zipCode,
+    },
     serviceTime,
     contactNo,
     email,
