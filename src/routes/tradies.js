@@ -8,6 +8,7 @@ const {
   addJobForTradie,
   addOrderForTradie,
   getTradieInquiries,
+  TradieAcceptInquiry,
 } = require("../controllers/tradies");
 const router = express.Router();
 
@@ -19,4 +20,5 @@ router.put("/:id", updateTradie);
 router.delete("/:id", deleteTradie);
 router.post("/:id/jobs/:code", addJobForTradie);
 router.post("/:id/order/:code", addOrderForTradie);
+router.post("/:id/inquiry/:code", TradieAcceptInquiry);
 module.exports = router;

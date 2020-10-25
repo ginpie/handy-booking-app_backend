@@ -112,6 +112,7 @@ async function CustomersSendInquiry(req, res) {
   console.log("customer sent a inquiry ");
   return res.json(customer);
 }
+
 module.exports = {
   getAllCustomers,
   getCustomerAllInfo,
