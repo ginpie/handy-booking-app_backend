@@ -80,15 +80,16 @@ async function updateCustomerAddress(req, res) {
 async function addOrderForCustomers(req, res) {
   const { id, code } = req.params;
   const customer = await CustomerModel.findById(id).select("id orders").exec();
+  console.log(customer);
   const order = await OrderModel.findById(code)
-    .select(" _id createTime ContactNo message clientId")
+    .select(" _id createTime ContactNo message customers")
     .exec();
-  console.log(order);
+  // console.log(order);
   if (!customer || !order) {
     return res.status(404).json("Order or Customer Not Found");
   }
   customer.orders.addToSet(order._id);
-  order.clientId.addToSet(customer._id);
+  order.customers.addToSet(customer._id);
   await customer.save();
   await order.save();
   console.log("customer sent a order ");
