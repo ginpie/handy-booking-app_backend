@@ -1,8 +1,8 @@
 const UserModel = require("../models/user");
 const CustomerModel = require("../models/customer");
 const TradieModel = require("../models/tradie");
-const { generateToken } = require("../utils/jwt");
 
+const { generateToken,validateToken } = require("../utils/jwt");
 async function getAllUsers(req, res) {
   const user = await UserModel.find().exec();
   res.json(user);
@@ -115,6 +115,7 @@ async function updateUserPassword(req, res) {
 }
 async function addUserTOCustomers(req, res) {
   const { id, code } = req.params;
+  // const userToken = validateToken(token,JWT_KEY);
   const user = await UserModel.findById(id).select("id customers").exec();
   const customer = await CustomerModel.findById(code)
     .select("customerId ContactNo address users")

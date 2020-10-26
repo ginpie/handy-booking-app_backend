@@ -17,13 +17,14 @@ async function logInUser(req, res) {
     id: existUser.id,
     email: existUser.email,
   };
-  const token = generateToken(existUser.email);
+  const token = generateToken(existUser.id);
   return res.set("X-Auth-Token", token).status(200).json(unSeeUser);
   
 }
 
 async function stayLogIn(req,res){
   const token = req.get("X-Auth-Token");
+  // console.log(token);
   if(!token){
     return res.status(404).json("Not Found User");
   }
@@ -32,7 +33,12 @@ async function stayLogIn(req,res){
     if(!result){
       return res.status(404).json("Not Found User")
     }
-    const user = await UserModel.findOne(result.id).exec();
+    // console.log('0')
+    // console.log(result)
+    // console.log(result.id)
+    // console.log('1')
+    const user = await UserModel.findById(result.id).exec();
+    // console.log(user)
     if(!user){
       return res.status(404).json("Not Found User")
     }
@@ -40,6 +46,7 @@ async function stayLogIn(req,res){
       id: user.id,
       email: user.email,
     };
+    console.log(unSeeUser)
     return res.status(200).json(unSeeUser);
   }
     catch(e){
