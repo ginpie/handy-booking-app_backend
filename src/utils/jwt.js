@@ -19,6 +19,7 @@ function validateToken(token) {
   }
   return payload;
 }
+
 module.exports = {
   generateToken,
   validateToken
