@@ -20,6 +20,17 @@ async function getUser(req, res) {
   return res.json(user);
 }
 
+async function getMe(req, res) {
+  const user = await UserModel.findOne({"email" : req.user.id})
+    .populate("customers")
+    .populate("tradies")
+    .exec();
+  if (!user) {
+    return res.status(404).json("user Not Found");
+  }
+  return res.json(user);
+}
+
 async function addUser(req, res) {
   // const { email, firstName, lastName } = req.body;
 
@@ -42,7 +53,7 @@ async function addUser(req, res) {
     // firstName,
     // lastName,
   });
-  await user.hashPassword();
+  await user.hashPassword(); 
   await user.save();
 
   const token = generateToken(user._id);
@@ -238,4 +249,5 @@ module.exports = {
   addUserTOTradies,
   notCustomer,
   notTradie,
+  getMe,
 };

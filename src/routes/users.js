@@ -1,4 +1,5 @@
 const express = require("express");
+const authGuard = require("../middleware/authGuard");
 const {
   getAllUsers,
   getUser,
@@ -11,10 +12,12 @@ const {
   notCustomer,
   notTradie,
   updateUserPassword,
+  getMe
 } = require("../controllers/users");
 const router = express.Router();
 
 router.get("/", getAllUsers);
+router.get("/me", authGuard, getMe);
 router.get("/:id", getUser);
 router.post("/", addUser);
 router.put("/:id", updateUser);
