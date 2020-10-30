@@ -1,5 +1,5 @@
 const Order = require("../models/order");
-
+const ServiceModel = require("../models/service");
 async function addOrder(req, res) {
 
     const { 
@@ -108,6 +108,50 @@ async function getOrdersByTradies(req, res) {
   return res.json(orders);
 }
 
+async function linkOrderToService(req, res) {
+  // service id , job id get ,
+  const { id, code } = req.params;
+  const order = await Order.findById(id)
+    .select("services ")
+    .exec();
+  const service = await ServiceModel.findById(code)
+    .select("orders")
+    .exec();
+  if (!order || !service) {
+    return res.status(404).json("Order or Service Not Found");
+  }
+  if (order.services.length == 0) {
+    order.services.addToSet(service._id);
+    service.orders.addToSet(order._id);
+    await order.save();
+    await service.save();
+    console.log("link successful beteween order and service");
+    return res.json(order);
+  } 
+  else {
+    const copyItem = order.services.slice();
+    // console.log(copyItem); //[1]
+    const orderServicesExistedItem = copyItem[0];
+    // console.log(jobServicesExistedItem); //1   == service._id
+    const preService = await ServiceModel.findById(orderServicesExistedItem)
+      .select("orders")
+      .exec();
+    // console.log(preService);
+    // console.log(preService.jobs); //找到之前关联的service信息
+    // console.log(job._id);
+    preService.orders.pull(order._id); //取消之前service的关联
+    await preService.save();
+    order.services.pop();
+    order.services.addToSet(service._id);
+    service.orders.addToSet(order._id);
+    await order.save();
+    await service.save();
+    console.log("Update Link");
+    return res.json(order);
+  }
+}
+
+
 module.exports = {
   addOrder,
   getOrder,
@@ -116,4 +160,5 @@ module.exports = {
   deleteOrder,
   addReviews,
   getOrdersByTradies,
+  linkOrderToService,
 };

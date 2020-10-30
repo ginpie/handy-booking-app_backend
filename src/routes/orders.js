@@ -8,6 +8,7 @@ const {
   deleteOrder,
   addReviews,
   getOrdersByTradies,
+  linkOrderToService,
 } = require("../controllers/orders");
 
 const router = express.Router();
@@ -19,5 +20,5 @@ router.put("/:id/complete", completeOrder);
 router.put("/:id/delete", deleteOrder);
 router.put("/:id/review", addReviews);
 router.get("/:id/reviews", getOrdersByTradies);
-
+router.post("/:id/services/:code", linkOrderToService);
 module.exports = router;

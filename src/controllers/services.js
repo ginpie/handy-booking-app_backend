@@ -15,6 +15,7 @@ async function getService(req, res) {
   const { id: code } = req.params;
   const service = await ServiceModel.findById(code)
     .populate("jobs", "jobName visible")
+    .populate("orders", "createTime serviceTime address  contactNo  email name totalPrice  message service tradiesId rating comment")
     .exec();
   if (!service) {
     return res.status(404).json("Service Not Found");
@@ -59,6 +60,7 @@ async function deleteService(req, res) {
       },
     }
   ).exec();
+  
   return res.sendStatus(204);
 }
 

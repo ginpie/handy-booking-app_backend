@@ -51,21 +51,6 @@ const schema = mongoose.Schema({
     // ref: "Message",
     required: true,
   },
-  // serviceId: {
-  //   type: String,
-  //   ref: "Service",
-  //   required: true,
-  // },
-  // clientId: {
-  //   type: mongoose.Schema.Types.String,
-  //   refer: "Customer",
-  //   required: true,
-  // },
-  // tradiesId: {
-  //   type: mongoose.Schema.Types.String,
-  //   refer: "Tradie",
-  //   required: true,
-  // },
   services: { type: [{ type: String, ref: "Service" }], select: false },
   customers: { type: [{ type: String, ref: "Customer", }], select: false },
   tradies: { type: [{ type: String, ref: "Tradie", }], select: false },
