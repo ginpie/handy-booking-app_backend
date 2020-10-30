@@ -1,4 +1,5 @@
 const Inquiry = require("../models/inquiry");
+const ServiceModel = require("../models/service");
 const {
   addOrder
 } = require("./orders");
@@ -6,18 +7,14 @@ const {
 async function addInquiry(req, res) {
   const {
     address,
-    address2,
-    suburb,
-    state,
-    zipCode,
     serviceTime,
     contactNo,
     email,
     name,
     message,
-    serviceId,
-    clientId,
-    tradiesId,
+    // serviceId,
+    // clientId,
+    // tradiesId,
   } = req.body;
 
 
@@ -27,21 +24,15 @@ async function addInquiry(req, res) {
 
   const inquiry = new Inquiry({
     createTime,
-    address: {
-      address,
-      address2,
-      suburb,
-      state,
-      zipCode,
-    },
+    address,
     serviceTime,
     contactNo,
     email,
     name,
     message,
-    serviceId,
-    clientId,
-    tradiesId,
+    // serviceId,
+    // clientId,
+    // tradiesId,
     accepted,
   });
 
@@ -55,7 +46,11 @@ async function getInquiry(req, res) {
   const {
     id
   } = req.params;
-  const inquiry = await Inquiry.findById(id).exec();
+  const inquiry = await Inquiry.findById(id)
+  .populate("services")
+  .populate("customers")
+  .populate("tradies")
+  .exec();
   if (!inquiry) {
     return res.status(404).json("This inquiry is not found!");
   }
@@ -127,16 +122,17 @@ async function acceptInquiry(req, res) {
 
   await newInquiry.save();
 
-  const address = `${inquiry.address} ${inquiry.address2} ${inquiry.suburb} ${inquiry.state} ${inquiry.zipCode}`;
+  //const address = `${inquiry.address1} ${inquiry.address2} ${inquiry.suburb} ${inquiry.state} ${inquiry.zipCode}`;
   const {
     serviceTime,
     contactNo,
+    address,
     name,
     email,
     totalPrice,
-    serviceId,
-    clientId,
-    tradiesId
+    services,
+    customers,
+    tradies
   } = inquiry;
   await addOrder({
     body: {
@@ -146,9 +142,9 @@ async function acceptInquiry(req, res) {
       email,
       name,
       totalPrice,
-      serviceId,
-      clientId,
-      tradiesId
+      services,
+      customers,
+      tradies
     }
   }, res)
 
@@ -174,6 +170,43 @@ async function deleteInquiry(req, res) {
   return res.json("This inquiry is successfully deleted");
 }
 
+async function linkInquiryToService(req, res) {
+  const { id, code } = req.params;
+  const inquiry = await Inquiry.findById(id)
+    .select("services ")
+    .exec();
+  const service = await ServiceModel.findById(code)
+    .select("inquiries")
+    .exec();
+  if (!inquiry || !service) {
+    return res.status(404).json("Inquiry or Service Not Found");
+  }
+  if (inquiry.services.length == 0) {
+    inquiry.services.addToSet(service._id);
+    service.inquiries.addToSet(inquiry._id);
+    await inquiry.save();
+    await service.save();
+    console.log("link successful beteween Inquiry and Service");
+    return res.json(inquiry);
+  } 
+  else {
+    const copyItem = inquiry.services.slice();
+    const inquiryServicesExistedItem = copyItem[0];
+    const preService = await ServiceModel.findById(inquiryServicesExistedItem)
+      .select("inquiries")
+      .exec();
+    preService.inquiries.pull(inquiry._id);
+    await preService.save();
+    inquiry.services.pop();
+    inquiry.services.addToSet(service._id);
+    service.inquiries.addToSet(inquiry._id);
+    await inquiry.save();
+    await service.save();
+    console.log("Update Link");
+    return res.json(inquiry);
+  }
+}
+
 // modules available
 module.exports = {
   addInquiry,
@@ -182,4 +215,5 @@ module.exports = {
   addPrice,
   acceptInquiry,
   deleteInquiry,
+  linkInquiryToService,
 };

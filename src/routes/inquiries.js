@@ -7,6 +7,7 @@ const {
   addPrice,
   acceptInquiry,
   deleteInquiry,
+  linkInquiryToService,
 } = require("../controllers/inquiries");
 
 const router = express.Router();
@@ -17,5 +18,5 @@ router.post("/", addInquiry);
 router.put("/:id/accepted", acceptInquiry);
 router.put("/:id/price", addPrice);
 router.put("/:id/delete", deleteInquiry);
-
+router.post("/:id/services/:code", linkInquiryToService);
 module.exports = router;
