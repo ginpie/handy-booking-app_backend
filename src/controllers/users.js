@@ -21,7 +21,7 @@ async function getUser(req, res) {
 }
 
 async function getMe(req, res) {
-  const user = await UserModel.findOne({"email" : req.user.id})
+  const user = await UserModel.findById(req.user.id)
     .populate("customers")
     .populate("tradies")
     .exec();
