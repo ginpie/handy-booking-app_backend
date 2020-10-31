@@ -121,6 +121,7 @@ async function updateUserPassword(req, res) {
   if (!user) {
     return res.status(404).json("user Not Found");
   }
+  await user.hashPassword(); 
   await user.save();
   return res.json(user);
 }
