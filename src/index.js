@@ -15,7 +15,7 @@ const routes = require("./routes");
 app.use(express.json());
 app.use(
   cors({
-    exposedHeaders: "X-Auth-Token",
+    exposedHeaders: "Authorization",
   })
 );
 app.use(bodyParser.json());
