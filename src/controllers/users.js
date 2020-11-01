@@ -57,7 +57,9 @@ async function addUser(req, res) {
   await user.save();
 
   const token = generateToken(user._id);
-  return res.set("X-Auth-Token", token).status(200).json({ email, token })
+  const authorization = `Bearer ${token}`
+  // console.log(authorization)
+  return res.set("Authorization", authorization).status(200).json({ email, authorization })
 }
 
 async function deleteUser(req, res) {

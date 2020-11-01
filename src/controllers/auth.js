@@ -18,18 +18,23 @@ async function logInUser(req, res) {
     email: existUser.email,
   };
   const token = generateToken(existUser.id);
-  return res.set("X-Auth-Token", token).status(200).json(unSeeUser);
-  
+  const authorization = `Bearer ${token}`
+  // console.log("1")
+  // console.log(authorization)
+  return res.set('Authorization',authorization).status(200).json(unSeeUser);
 }
 
 async function stayLogIn(req,res){
-  const token = req.get("X-Auth-Token");
-  // console.log(token);
+  const token = req.get("Authorization");
   if(!token){
     return res.status(404).json("Not Found User");
   }
+  // console.log(token);
+  const contentArr = token.split(" ");
+  if (contentArr.length !== 2 || contentArr[0] !== "Bearer")
+    return res.status(401).json("Access Denied");
   try{
-    const result = validateToken(token,JWT_KEY);
+    const result = validateToken(contentArr[1],JWT_KEY);
     if(!result){
       return res.status(404).json("Not Found User")
     }
@@ -46,7 +51,7 @@ async function stayLogIn(req,res){
       id: user.id,
       email: user.email,
     };
-    console.log(unSeeUser)
+    // console.log(unSeeUser)
     return res.status(200).json(unSeeUser);
   }
     catch(e){
