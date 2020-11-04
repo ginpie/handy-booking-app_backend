@@ -10,31 +10,31 @@ const schema = mongoose.Schema({
   address: {
     address1: {
       type: String,
-      required: true,
+      // required: true,
     },
     address2: {
     type: String,
     },
     suburb: {
       type: String,
-      required: true,
+      // required: true,
     },
     state: {
       type: String,
-      required: true,
+      // required: true,
     },
     zipCode: {
       type: Number,
-      required: true,
+      // required: true,
     },
   },
   serviceTime: {
     type: String,
-    required: true,
+    // required: true,
   },
   contactNo: {
     type: String,
-    required: false,
+    // required: false,
   },
   email: {
     type: String,
@@ -49,11 +49,11 @@ const schema = mongoose.Schema({
   message: {
     type: String,
     // ref: "Message",
-    required: true,
+    // required: true,
   },
-  services: { type: [{ type: String, ref: "Service" }], select: false },
-  customers: { type: [{ type: String, ref: "Customer", }], select: false },
-  tradies: { type: [{ type: String, ref: "Tradie", }], select: false },
+  // services: { type: [{ type: String, ref: "Service" }], select: false },
+  // customers: { type: [{ type: String, ref: "Customer", }], select: false },
+  // tradies: { type: [{ type: String, ref: "Tradie", }], select: false },
   totalPrice: {
     type: Number,
   },
