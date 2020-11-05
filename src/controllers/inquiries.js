@@ -15,7 +15,7 @@ async function addInquiry(req, res) {
     message,
     // serviceId,
     // clientId,
-    // tradiesId,
+    tradies,
   } = req.body;
 
   console.log(req.body);
@@ -33,7 +33,7 @@ async function addInquiry(req, res) {
     message,
     // serviceId,
     // clientId,
-    // tradiesId,
+    tradies,
     accepted,
   });
 
@@ -50,7 +50,6 @@ async function getInquiry(req, res) {
   const inquiry = await Inquiry.findById(id)
   .populate("services")
   .populate("customers")
-  .populate("tradies")
   .exec();
   if (!inquiry) {
     return res.status(404).json("This inquiry is not found!");
