@@ -7,6 +7,7 @@ const {
   updateTradie,
   addJobForTradie,
   addOrderForTradie,
+  addInquiryForTradie,
   getTradieInquiries,
   TradieAcceptInquiry,
 } = require("../controllers/tradies");
@@ -17,6 +18,7 @@ router.get("/:id", getTradieAllInfo);
 router.get("/:id/inquiry", getTradieInquiries);
 router.post("/", addTradie);
 router.put("/:id", updateTradie);
+router.put("/:id/inquiry", addInquiryForTradie);
 router.delete("/:id", deleteTradie);
 router.post("/:id/jobs/:code", addJobForTradie);
 router.post("/:id/order/:code", addOrderForTradie);

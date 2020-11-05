@@ -3,36 +3,55 @@ const ServiceModel = require("../models/service");
 const {
   addOrder
 } = require("./orders");
+const TradiesModel = require("../models/tradie");
+const { addInquiryForTradie } = require('./tradies');
 
 async function addInquiry(req, res) {
   const {
     address,
-    serviceTime,
+    // serviceTime,
     contactNo,
     email,
     name,
     // serviceId,
     // clientId,
-    // tradiesId,
-  } = req.body.data;
+    tradies,
+  } = req.body;
+
+  console.log(req.body);
+
   const createTime = new Date();
   const accepted = false;
   const inquiry = new Inquiry({
     createTime,
     address,
-    serviceTime,
+    // serviceTime,
     contactNo,
     email,
     name,
     message,
     // serviceId,
     // clientId,
-    // tradiesId,
+    tradies,
     accepted,
   });
 
   await inquiry.save();
-  return res.status(201).json(inquiry);
+
+  try {
+    await addInquiryForTradie({
+      params: {
+        id: tradies,
+      },
+      body: {
+        inquiry: inquiry._id
+      }
+    }, res)
+  } catch (err) {
+    console.log(err);
+  }
+
+  return res.status(201).json(inquiry._id);
 }
 
 // Read the inquiry using id
@@ -43,7 +62,6 @@ async function getInquiry(req, res) {
   const inquiry = await Inquiry.findById(id)
   .populate("services")
   .populate("customers")
-  .populate("tradies")
   .exec();
   if (!inquiry) {
     return res.status(404).json("This inquiry is not found!");
