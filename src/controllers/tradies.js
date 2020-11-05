@@ -144,6 +144,18 @@ async function addOrderForTradie(req, res) {
   return res.json(tradie);
 }
 
+async function addInquiryForTradie(req, res) {
+  const { id } = req.params;
+  const { inquiry } = req.body;
+  const tradie = await TradieModel.findById(id).select("id inquiries").exec();
+  if (!tradie) {
+    return res.status(404).json("Order or Tradie Not Found");
+  }
+  tradie.inquiries.addToSet(inquiry);
+  await tradie.save();
+  console.log("Tradie accept inquiry ");
+}
+
 async function TradieAcceptInquiry(req, res) {
   const { id, code } = req.params;
   const tradie = await TradieModel.findById(id).select("id inquiries").exec();
@@ -171,4 +183,5 @@ module.exports = {
   addOrderForTradie,
   getTradieInquiries,
   TradieAcceptInquiry,
+  addInquiryForTradie
 };
