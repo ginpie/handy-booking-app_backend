@@ -16,6 +16,7 @@ async function addInquiry(req, res) {
     // serviceId,
     // clientId,
     tradies,
+    message
   } = req.body;
 
   console.log(req.body);
