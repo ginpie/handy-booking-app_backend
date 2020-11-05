@@ -54,7 +54,7 @@ const schema = mongoose.Schema({
   // services: { type: [{ type: String, ref: "Service" }], select: false },
   // customers: { type: [{ type: String, ref: "Customer", }], select: false },
   tradies: {  
-    type: mongoose.Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.String, 
     ref: "Tradie", 
   },
   totalPrice: {

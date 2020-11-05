@@ -4,6 +4,7 @@ const {
   addOrder
 } = require("./orders");
 const TradiesModel = require("../models/tradie");
+const { addInquiryForTradie } = require('./tradies');
 
 async function addInquiry(req, res) {
   const {
@@ -39,7 +40,20 @@ async function addInquiry(req, res) {
 
   await inquiry.save();
 
-  return res.status(201).json(inquiry);
+  try {
+    await addInquiryForTradie({
+      params: {
+        id: tradies,
+      },
+      body: {
+        inquiry: inquiry._id
+      }
+    }, res)
+  } catch (err) {
+    console.log(err);
+  }
+
+  return res.status(201).json(inquiry._id);
 }
 
 // Read the inquiry using id
