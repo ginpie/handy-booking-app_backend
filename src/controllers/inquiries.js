@@ -11,11 +11,11 @@ async function addInquiry(req, res) {
     contactNo,
     email,
     name,
-    //message,
+    message,
     // serviceId,
     // clientId,
     // tradiesId,
-  } = req.body.data;
+  } = req.body;
   const createTime = new Date();
   const accepted = false;
   const inquiry = new Inquiry({
@@ -25,7 +25,7 @@ async function addInquiry(req, res) {
     contactNo,
     email,
     name,
-    //message,
+    message,
     // serviceId,
     // clientId,
     // tradiesId,
