@@ -5,7 +5,7 @@ const {
 } = require("./orders");
 const TradiesModel = require("../models/tradie");
 const { addInquiryForTradie } = require('./tradies');
-
+const { addInquiryForCustomer } = require('./customers');
 async function addInquiry(req, res) {
   const {
     address,
@@ -15,7 +15,7 @@ async function addInquiry(req, res) {
     name,
     message,
     // serviceId,
-    // clientId,
+    customers,
     tradies,
   } = req.body;
 
@@ -32,7 +32,7 @@ async function addInquiry(req, res) {
     name,
     message,
     // serviceId,
-    // clientId,
+    customers,
     tradies,
     accepted,
   });
@@ -43,6 +43,19 @@ async function addInquiry(req, res) {
     await addInquiryForTradie({
       params: {
         id: tradies,
+      },
+      body: {
+        inquiry: inquiry._id
+      }
+    }, res)
+  } catch (err) {
+    console.log(err);
+  }
+
+  try {
+    await addInquiryForCustomer({
+      params: {
+        id: customers,
       },
       body: {
         inquiry: inquiry._id

@@ -113,6 +113,18 @@ async function CustomersSendInquiry(req, res) {
   return res.json(customer);
 }
 
+async function addInquiryForCustomer(req, res) {
+  const { id } = req.params;
+  const { inquiry } = req.body;
+  const customer = await CustomerModel.findById(id).select("id inquiries").exec();
+  if (!customer) {
+    return res.status(404).json("Order or customer Not Found");
+  }
+  customer.inquiries.addToSet(inquiry);
+  await customer.save();
+  console.log("customer accept inquiry ");
+}
+
 module.exports = {
   getAllCustomers,
   getCustomerAllInfo,
@@ -122,4 +134,5 @@ module.exports = {
   addOrderForCustomers,
   getCustomerOrderInfo,
   CustomersSendInquiry,
+  addInquiryForCustomer,
 };

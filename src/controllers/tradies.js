@@ -166,6 +166,7 @@ async function addInquiryForTradie(req, res) {
   console.log("Tradie accept inquiry ");
 }
 
+
 async function TradieAcceptInquiry(req, res) {
   const { id, code } = req.params;
   const tradie = await TradieModel.findById(id).select("id inquiries").exec();
