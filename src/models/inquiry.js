@@ -52,7 +52,7 @@ const schema = mongoose.Schema({
     // required: true,
   },
   // services: { type: [{ type: String, ref: "Service" }], select: false },
-  // customers: { type: [{ type: String, ref: "Customer", }], select: false },
+  customers: { type: [{ type: String, ref: "Customer", }], select: false },
   tradies: {  
     type: mongoose.Schema.Types.String, 
     ref: "Tradie", 

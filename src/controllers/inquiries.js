@@ -13,6 +13,7 @@ async function addInquiry(req, res) {
     contactNo,
     email,
     name,
+    message,
     // serviceId,
     // clientId,
     tradies,
@@ -52,7 +53,7 @@ async function addInquiry(req, res) {
     console.log(err);
   }
 
-  return res.status(201).json(inquiry._id);
+  return res.status(201).json(inquiry);
 }
 
 // Read the inquiry using id
