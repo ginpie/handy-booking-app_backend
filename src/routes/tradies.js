@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getAllTradies,
   getTradieAllInfo,
+  getTradieOrderInfo,
   addTradie,
   deleteTradie,
   updateTradie,
@@ -23,4 +24,5 @@ router.delete("/:id", deleteTradie);
 router.post("/:id/jobs/:code", addJobForTradie);
 router.post("/:id/order/:code", addOrderForTradie);
 router.post("/:id/inquiry/:code", TradieAcceptInquiry);
+router.get("/:id/order", getTradieOrderInfo);
 module.exports = router;

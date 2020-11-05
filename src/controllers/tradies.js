@@ -38,6 +38,16 @@ async function getTradieInquiries(req, res) {
   return res.json(tradie);
 }
 
+async function getTradieOrderInfo(req, res) {
+  const { id: tradieId } = req.params;
+  const tradie = await TradieModel.findById(tradieId)
+    .populate("orders", "createTime serviceTime address  contactNo  email name totalPrice  message service tradiesId rating comment")
+    .exec();
+  if (!Tradie) {
+    return res.status(404).json("Tradie Not Found");
+  }
+  return res.json(Tradie);
+}
 
 async function addTradie(req, res) {
   const { tradieId } = req.body;
@@ -176,6 +186,7 @@ async function TradieAcceptInquiry(req, res) {
 module.exports = {
   getAllTradies,
   getTradieAllInfo,
+  getTradieOrderInfo,
   addTradie,
   deleteTradie,
   updateTradie,
