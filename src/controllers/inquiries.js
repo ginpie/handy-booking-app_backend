@@ -3,11 +3,12 @@ const ServiceModel = require("../models/service");
 const {
   addOrder
 } = require("./orders");
+const TradiesModel = require("../models/tradie");
 
 async function addInquiry(req, res) {
   const {
     address,
-    serviceTime,
+    // serviceTime,
     contactNo,
     email,
     name,
@@ -17,7 +18,7 @@ async function addInquiry(req, res) {
     // tradiesId,
   } = req.body;
 
-
+  console.log(req.body);
 
   const createTime = new Date();
   const accepted = false;
@@ -25,7 +26,7 @@ async function addInquiry(req, res) {
   const inquiry = new Inquiry({
     createTime,
     address,
-    serviceTime,
+    // serviceTime,
     contactNo,
     email,
     name,
