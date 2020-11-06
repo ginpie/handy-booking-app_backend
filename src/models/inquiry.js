@@ -48,11 +48,13 @@ const schema = mongoose.Schema({
   // inquiry information
   message: {
     type: String,
-    // ref: "Message",
     // required: true,
   },
   // services: { type: [{ type: String, ref: "Service" }], select: false },
-  customers: { type: [{ type: String, ref: "Customer", }], select: false },
+  customers: {  
+    type: mongoose.Schema.Types.String,  
+    ref: "Customer", 
+  },
   tradies: {  
     type: mongoose.Schema.Types.String, 
     ref: "Tradie", 

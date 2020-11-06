@@ -3,8 +3,8 @@ const ServiceModel = require("../models/service");
 const {
   addOrder
 } = require("./orders");
-const TradiesModel = require("../models/tradie");
 const { addInquiryForTradie } = require('./tradies');
+const { addInquiryForCustomer } = require('./customers');
 
 async function addInquiry(req, res) {
   const {
@@ -15,7 +15,7 @@ async function addInquiry(req, res) {
     name,
     message,
     // serviceId,
-    // clientId,
+    customers,
     tradies,
     message
   } = req.body;
@@ -33,7 +33,7 @@ async function addInquiry(req, res) {
     name,
     message,
     // serviceId,
-    // clientId,
+    customers,
     tradies,
     accepted,
   });
@@ -44,6 +44,19 @@ async function addInquiry(req, res) {
     await addInquiryForTradie({
       params: {
         id: tradies,
+      },
+      body: {
+        inquiry: inquiry._id
+      }
+    }, res)
+  } catch (err) {
+    console.log(err);
+  }
+  console.log("customers" +customers)
+  try {
+    await addInquiryForCustomer({
+      params: {
+        id: customers,
       },
       body: {
         inquiry: inquiry._id
@@ -63,7 +76,6 @@ async function getInquiry(req, res) {
   } = req.params;
   const inquiry = await Inquiry.findById(id)
   .populate("services")
-  .populate("customers")
   .exec();
   if (!inquiry) {
     return res.status(404).json("This inquiry is not found!");
