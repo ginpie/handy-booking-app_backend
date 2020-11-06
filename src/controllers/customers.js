@@ -2,6 +2,7 @@ const UserModel = require("../models/user");
 const CustomerModel = require("../models/customer");
 const OrderModel = require("../models/order");
 const InquiryModel = require("../models/inquiry");
+
 async function getAllCustomers(req, res) {
   const customer = await CustomerModel.find().exec();
   res.json(customer);
@@ -122,7 +123,7 @@ async function addInquiryForCustomer(req, res) {
   }
   customer.inquiries.addToSet(inquiry);
   await customer.save();
-  console.log("customer accept inquiry ");
+  console.log("Customer accept inquiry ");
 }
 
 module.exports = {

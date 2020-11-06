@@ -48,7 +48,6 @@ const schema = mongoose.Schema({
   // inquiry information
   message: {
     type: String,
-    // ref: "Message",
     // required: true,
   },
   // services: { type: [{ type: String, ref: "Service" }], select: false },
