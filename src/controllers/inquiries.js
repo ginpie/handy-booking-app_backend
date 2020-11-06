@@ -13,11 +13,10 @@ async function addInquiry(req, res) {
     contactNo,
     email,
     name,
-    message,
     // serviceId,
     customers,
     tradies,
-    message
+    message,
   } = req.body;
 
   console.log(req.body);

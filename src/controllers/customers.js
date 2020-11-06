@@ -26,7 +26,7 @@ async function getCustomerAllInfo(req, res) {
 async function getCustomerOrderInfo(req, res) {
   const { id: customerId } = req.params;
   const customer = await CustomerModel.findById(customerId)
-  .populate("inquiries", "createTime serviceTime address  contactNo  email name message serviceId tradiesId totalPrice accepted")
+  .populate("inquiries", "createTime serviceTime address  contactNo  email name message serviceId tradiesId totalPrice accepted complete")
     .exec();
   if (!customer) {
     return res.status(404).json("customer Not Found");
