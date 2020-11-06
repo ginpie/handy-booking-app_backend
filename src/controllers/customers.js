@@ -26,6 +26,17 @@ async function getCustomerAllInfo(req, res) {
 async function getCustomerOrderInfo(req, res) {
   const { id: customerId } = req.params;
   const customer = await CustomerModel.findById(customerId)
+  .populate("inquiries", "createTime serviceTime address  contactNo  email name message serviceId tradiesId totalPrice accepted")
+    .exec();
+  if (!customer) {
+    return res.status(404).json("customer Not Found");
+  }
+  return res.json(customer);
+}
+
+async function getCustomerInquiryInfo(req, res) {
+  const { id: customerId } = req.params;
+  const customer = await CustomerModel.findById(customerId)
     .populate("orders", "createTime serviceTime address  contactNo  email name totalPrice  message service tradiesId rating comment")
     .exec();
   if (!customer) {
@@ -135,5 +146,5 @@ module.exports = {
   addOrderForCustomers,
   getCustomerOrderInfo,
   CustomersSendInquiry,
-  addInquiryForCustomer,
+  addInquiryForCustomer,getCustomerInquiryInfo,
 };
