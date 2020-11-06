@@ -181,17 +181,17 @@ async function deleteInquiry(req, res) {
   const {
     id
   } = req.params;
-  const order = await Order.findByIdAndUpdate(id, {
+  const inquiry = await Inquiry.findByIdAndUpdate(id, {
     deleted: true
   }).exec();
-  if (!order) {
+  if (!inquiry) {
     return res.status(404).json("This inquiry is not found!");
   }
-  if (order.deleted) {
+  if (inquiry.deleted) {
     return res.status(406).json("This inquiry is already deleted");
   }
 
-  await order.save();
+  await inquiry.save();
   return res.json("This inquiry is successfully deleted");
 }
 

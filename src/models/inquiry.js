@@ -66,6 +66,10 @@ const schema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  deleted: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const Model = mongoose.model("Inquiry", schema);

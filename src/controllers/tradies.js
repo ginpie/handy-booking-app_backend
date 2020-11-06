@@ -30,7 +30,7 @@ async function getTradieAllInfo(req, res) {
 async function getTradieInquiries(req, res) {
   const { id: tradieId } = req.params;
   const tradie = await TradieModel.findById(tradieId)
-    .populate("inquiries", "jobDateTime createTime zipCode contactNo email firstName lastName")
+    .populate("inquiries", "createTime serviceTime address  contactNo  email name message serviceId tradiesId totalPrice accepted")
     .exec();
   if (!tradie) {
     return res.status(404).json("tradie Not Found");
