@@ -9,7 +9,7 @@ const schema = mongoose.Schema(
         },
         serviceTime: {
             type: Date,
-            required: true,
+            // required: true,
         },
         address: {
             address1: {
@@ -35,10 +35,10 @@ const schema = mongoose.Schema(
         contactNo: {
             type: String,
             required: true,
-            validate: {
-                validator: (contactNo) => !Joi.string().length(10).regex(/^[0-9]+$/).validate(contactNo).error,
-                msg: "Invalid phone number"
-            }
+            // validate: {
+            //     validator: (contactNo) => !Joi.string().length(10).regex(/^[0-9]+$/).validate(contactNo).error,
+            //     msg: "Invalid phone number"
+            // }
         },
         email: {
             type: String,

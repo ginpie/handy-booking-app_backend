@@ -1,5 +1,10 @@
 const Order = require("../models/order");
 const ServiceModel = require("../models/service");
+const { addOrderForTradie } = require("./tradies");
+const { addOrderForCustomers } = require("./customers");
+
+// const { addOrderForTradie } = require("../controllers/")
+
 async function addOrder(req, res) {
 
     const { 
@@ -28,9 +33,22 @@ async function addOrder(req, res) {
         clientId, 
         tradiesId
     });
+    console.log("order" + order);
 
     try {
         await order.save();
+        await addOrderForTradie({
+          params: {
+            id: tradiesId,
+            code: order._id
+          }
+        }, res);
+        await addOrderForCustomers({
+          params: {
+            id: clientId,
+            code: order._id
+          }
+        }, res);
     } catch (error) {
         return res.status(400).json(error);
     }
