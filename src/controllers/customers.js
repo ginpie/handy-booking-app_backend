@@ -92,20 +92,20 @@ async function updateCustomerAddress(req, res) {
 async function addOrderForCustomers(req, res) {
   const { id, code } = req.params;
   const customer = await CustomerModel.findById(id).select("id orders").exec();
-  console.log(customer);
-  const order = await OrderModel.findById(code)
-    .select(" _id createTime ContactNo message customers")
-    .exec();
+  // console.log(customer);
+  // const order = await OrderModel.findById(code)
+  //   .select(" _id createTime ContactNo message customers")
+  //   .exec();
   // console.log(order);
-  if (!customer || !order) {
+  if (!customer) {
     return res.status(404).json("Order or Customer Not Found");
   }
-  customer.orders.addToSet(order._id);
-  order.customers.addToSet(customer._id);
+  customer.orders.addToSet(code);
+  // order.customers.addToSet(customer._id);
   await customer.save();
-  await order.save();
+  // await order.save();
   console.log("customer sent a order ");
-  return res.json(customer);
+  // return res.json(customer);
 }
 async function CustomersSendInquiry(req, res) {
   const { id, code } = req.params;

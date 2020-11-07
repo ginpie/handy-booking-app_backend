@@ -139,19 +139,19 @@ async function addOrderForTradie(req, res) {
   const { id, code } = req.params;
   const tradie = await TradieModel.findById(id).select("id orders").exec();
   console.log(tradie);
-  const order = await OrderModel.findById(code)
-    .select(" _id createTime ContactNo message tradies")
-    .exec();
+  // const order = await OrderModel.findById(code)
+  //   .select(" _id createTime ContactNo message tradies")
+  //   .exec();
   // console.log(order);
-  if (!tradie || !order) {
+  if (!tradie) {
     return res.status(404).json("Order or Tradie Not Found");
   }
-  tradie.orders.addToSet(order._id);
-  order.tradies.addToSet(tradie._id);
+  tradie.orders.addToSet(code);
+  // order.tradies.addToSet(tradie._id);
   await tradie.save();
-  await order.save();
+  // await order.save();
   console.log("Tradie accept order ");
-  return res.json(tradie);
+  // return res.json(tradie);
 }
 
 async function addInquiryForTradie(req, res) {

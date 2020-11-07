@@ -157,7 +157,8 @@ async function acceptInquiry(req, res) {
     totalPrice,
     services,
     customers,
-    tradies
+    tradies,
+    message
   } = inquiry;
   await addOrder({
     body: {
@@ -168,10 +169,11 @@ async function acceptInquiry(req, res) {
       name,
       totalPrice,
       services,
-      customers,
-      tradies
+      clientId: customers,
+      tradiesId: tradies,
+      message
     }
-  }, res)
+  }, res);
 
   return res.json(inquiry);
 }
